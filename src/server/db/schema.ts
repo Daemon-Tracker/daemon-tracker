@@ -24,7 +24,9 @@ export const spartansTable = createTable(
     spartansEmail: varchar("spartansEmail", { length: 255 }).unique().notNull(),
     spartansRole: varchar("spartansRole", {
       enum: ["user", "admin"],
-    }).notNull(),
+    })
+      .notNull()
+      .default("user"),
   },
   (spartan) => ({
     spartansEmailIdx: index("spartans_email_idx").on(spartan.spartansEmail),
@@ -49,7 +51,9 @@ export const sudoTable = createTable(
     }),
     sudoStatus: varchar("sudoStatus", {
       enum: ["Daemon", "Suspect", "Clear", "Unknown"],
-    }),
+    })
+      .notNull()
+      .default("Unknown"),
   },
   (sudo) => ({
     sudoNimIdx: index("sudo_nim_idx").on(sudo.sudoNim),
