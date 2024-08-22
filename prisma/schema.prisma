@@ -61,11 +61,11 @@ model VerificationToken {
 }
 
 model Sudo {
-  sudoId   String   @id @default(uuid())
-  sudoNim  Int      
-  sudoName String   
-  sudoMajor Major    
-  sudoStatus Status  
+  sudoId     String  @id @default(uuid())
+  sudoNim    Int
+  sudoName   String
+  sudoMajor  Major
+  sudoStatus Status @default(Unknown)
 
   @@index([sudoNim], name: "sudo_nim_idx")
   @@index([sudoName], name: "sudo_name_idx")
