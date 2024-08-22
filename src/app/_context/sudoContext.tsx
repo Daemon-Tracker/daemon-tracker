@@ -1,7 +1,7 @@
 "use client";
 import { type $Enums } from "@prisma/client";
 import React, { createContext, useState, type ReactNode } from "react";
-interface SudoContextType {
+export interface SudoContextType {
   sudoData: {
     sudoId?: string;
     sudoNim?: number;

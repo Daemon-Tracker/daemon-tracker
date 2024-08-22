@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useContext } from "react";
-import SudoItem from "./sudoItem";
+import SudoItemAdmin from "./sudoItemAdmin";
 import { SudoContext } from "../_context/sudoContext";
 
-const SudoList = () => {
+
+const SudoListAdmin = () => {
   const context = useContext(SudoContext);
   if (!context) {
     throw new Error(
@@ -20,8 +21,8 @@ const SudoList = () => {
   return (
     <div className="flex w-full flex-col justify-center px-3 py-6">
       {sudoData?.map((sudo) => (
-        <SudoItem
-          key={sudo.sudoId} // Use a unique key for each item
+        <SudoItemAdmin
+          key={sudo.sudoId}
           sudoName={sudo.sudoName}
           sudoNim={sudo.sudoNim}
           sudoMajor={sudo.sudoMajor}
@@ -32,4 +33,4 @@ const SudoList = () => {
   );
 };
 
-export default SudoList;
+export default SudoListAdmin;
