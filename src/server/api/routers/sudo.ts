@@ -11,7 +11,9 @@ import { db } from "~/server/db";
 import { sudoTable } from "~/server/db/schema";
 
 export const sudoRouter = createTRPCRouter({
-  getAll: publicProcedure.query(async () => {
+  getAllSudo: publicProcedure.query(async () => {
     return await db.select().from(sudoTable);
   }),
+
+
 });
