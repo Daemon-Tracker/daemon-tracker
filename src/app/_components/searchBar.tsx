@@ -17,7 +17,9 @@ const SearchBar = () => {
   const allSudo = api.sudo.getAllSudo.useQuery();
   const dataAllSudo = allSudo.data;
   useEffect(() => {
-    setSudoData(dataAllSudo);
+    if (dataAllSudo) {
+      setSudoData(dataAllSudo);
+    }
   }, [dataAllSudo, setSudoData]);
 
   // Hold search value
@@ -34,7 +36,9 @@ const SearchBar = () => {
   const sudoByName = api.sudo.getSudoByName.useQuery(query);
   const sudoDataByName = sudoByName.data;
   useEffect(() => {
-    setSudoData(sudoDataByName);
+    if (sudoDataByName) {
+      setSudoData(sudoDataByName);
+    }
   }, [sudoDataByName, setSudoData]);
 
   // Handle search button
@@ -46,7 +50,9 @@ const SearchBar = () => {
   const sudoByStatus = api.sudo.getSudoByStatus.useQuery(inputStatus);
   const sudoDataByStatus = sudoByStatus.data;
   useEffect(() => {
-    setSudoData(sudoDataByStatus);
+    if (sudoDataByStatus) {
+      setSudoData(sudoDataByStatus);
+    }
   }, [sudoDataByStatus, setSudoData]);
 
   const handleAllClicked = () => {

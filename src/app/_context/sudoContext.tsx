@@ -3,21 +3,13 @@ import { type $Enums } from "@prisma/client";
 import React, { createContext, useState, type ReactNode } from "react";
 export interface SudoContextType {
   sudoData: {
-    sudoId?: string;
-    sudoNim?: number;
-    sudoName?: string;
-    sudoMajor?: $Enums.Major;
-    sudoStatus?: $Enums.Status;
+    sudoId: string;
+    sudoNim: number;
+    sudoName: string;
+    sudoMajor: $Enums.Major;
+    sudoStatus: $Enums.Status;
   }[];
-  setSudoData: (
-    value: {
-      sudoId?: string;
-      sudoNim?: number;
-      sudoName?: string;
-      sudoMajor?: $Enums.Status;
-      sudoStatus?: $Enums.Status;
-    }[],
-  ) => void;
+  setSudoData: (value: SudoContextType["sudoData"]) => void;
 }
 
 export const SudoContext = createContext<SudoContextType | undefined>(

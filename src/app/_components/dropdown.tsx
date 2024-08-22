@@ -1,8 +1,9 @@
+import { $Enums } from "@prisma/client";
 import React, { useState } from "react";
 
 interface DropdownProps {
   options: { value: string }[];
-  onChange: (value: string) => void;
+  onChange: (value: $Enums.Status) => void;
   selectedValue: string;
 }
 
@@ -14,7 +15,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   return (
     <select
       value={selectedValue}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={(e) => onChange(e.target.value as $Enums.Status)}
       className="form-select -translate-x-[0.5px] bg-transparent text-sm text-white"
     >
       {options.map((option) => (
