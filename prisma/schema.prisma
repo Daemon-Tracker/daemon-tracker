@@ -59,3 +59,29 @@ model VerificationToken {
 
     @@unique([identifier, token])
 }
+
+model Sudo {
+  sudoId   String   @id @default(uuid())
+  sudoNim  Int      
+  sudoName String   
+  sudoMajor Major    
+  sudoStatus Status  
+
+  @@index([sudoNim], name: "sudo_nim_idx")
+  @@index([sudoName], name: "sudo_name_idx")
+  @@index([sudoStatus], name: "sudo_status_idx")
+}
+
+enum Major {
+  IF_Ganesha
+  IF_Jatinangor
+  STI_Ganesha
+  STI_Jatinangor
+}
+
+enum Status {
+  Daemon
+  Suspect
+  Clear
+  Unknown
+}
