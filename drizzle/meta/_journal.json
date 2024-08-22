@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1724260703950,
-      "tag": "0000_tired_lord_hawal",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1724261429371,
-      "tag": "0001_eager_doctor_spectrum",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1724301559874,
-      "tag": "0002_whole_big_bertha",
+      "when": 1724313186112,
+      "tag": "0000_ambiguous_shooting_star",
       "breakpoints": true
     }
   ]
