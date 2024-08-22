@@ -26,7 +26,7 @@ export const sudoRouter = createTRPCRouter({
     return await db
       .select()
       .from(sudoTable)
-      .where(like(sudoTable.sudoNim, `%${input}%`));
+      .where(eq(sudoTable.sudoNim, input));
   }),
   getSudoByStatus: publicProcedure
     .input(z.enum(["Daemon", "Suspect", "Clear", "Unknown"]))
