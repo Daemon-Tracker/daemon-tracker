@@ -7,37 +7,56 @@ import {
   serial,
   text,
   timestamp,
+  uuid,
   varchar,
 } from "drizzle-orm/pg-core";
 import { type AdapterAccount } from "next-auth/adapters";
 
-/**
- * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
- * database instance for multiple projects.
- *
- * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
- */
 export const createTable = pgTableCreator((name) => `daemon-tracker_${name}`);
 
-export const posts = createTable(
-  "post",
+export const spartansTable = createTable(
+  "spartans",
   {
-    id: serial("id").primaryKey(),
-    name: varchar("name", { length: 256 }),
-    createdById: varchar("created_by", { length: 255 })
+    spartansId: uuid("spartansId").primaryKey(),
+    spartansEmail: varchar("spartansEmail", { length: 255 }).unique().notNull(),
+    spartansRole: varchar("spartansRole", {
+      enum: ["user", "admin"],
+    })
       .notNull()
-      .references(() => users.id),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .default(sql`CURRENT_TIMESTAMP`)
-      .notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
-      () => new Date()
-    ),
+      .default("user"),
   },
-  (example) => ({
-    createdByIdIdx: index("created_by_idx").on(example.createdById),
-    nameIndex: index("name_idx").on(example.name),
-  })
+  (spartan) => ({
+    spartansEmailIdx: index("spartans_email_idx").on(spartan.spartansEmail),
+  }),
+);
+
+export const adminTable = createTable("admin", {
+  adminId: uuid("adminId").primaryKey(),
+  spartansEmail: varchar("spartansEmail", { length: 255 })
+    .references(() => spartansTable.spartansEmail)
+    .notNull(),
+});
+
+export const sudoTable = createTable(
+  "sudo",
+  {
+    sudoId: uuid("sudoId").primaryKey(),
+    sudoNim: integer("sudoNim").notNull(),
+    sudoName: varchar("sudoName", { length: 255 }).notNull(),
+    sudoMajor: varchar("sudoMajor", {
+      enum: ["IF Ganesha", "IF Jatinangor", "STI Ganesha", "STI Jatinangor"],
+    }),
+    sudoStatus: varchar("sudoStatus", {
+      enum: ["Daemon", "Suspect", "Clear", "Unknown"],
+    })
+      .notNull()
+      .default("Unknown"),
+  },
+  (sudo) => ({
+    sudoNimIdx: index("sudo_nim_idx").on(sudo.sudoNim),
+    sudoNameIdx: index("sudo_name_idx").on(sudo.sudoName),
+    sudoStatusIdx: index("sudo_status_idx").on(sudo.sudoStatus),
+  }),
 );
 
 export const users = createTable("user", {
