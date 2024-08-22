@@ -1,5 +1,5 @@
+import { postRouter } from "~/server/api/routers/post";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
-import { sudoRouter } from "./routers/sudo";
 
 /**
  * This is the primary router for your server.
@@ -7,7 +7,7 @@ import { sudoRouter } from "./routers/sudo";
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
-  sudo: sudoRouter,
+  post: postRouter,
 });
 
 // export type definition of API
