@@ -1,55 +1,64 @@
 import { z } from "zod";
-
-import {
-  createTRPCRouter,
+import { 
+  createTRPCRouter, 
   protectedProcedure,
-  publicProcedure,
+  publicProcedure, 
 } from "~/server/api/trpc";
+import { PrismaClient } from "@prisma/client";
 
-import { eq, and, or, like } from "drizzle-orm";
-
-import { db } from "~/server/db";
-
-import { sudoTable } from "~/server/db/schema";
+const prisma = new PrismaClient();
 
 export const sudoRouter = createTRPCRouter({
   getAllSudo: publicProcedure.query(async () => {
-    return await db.select().from(sudoTable);
+    return await prisma.sudo.findMany();
   }),
+  
   getSudoByName: publicProcedure.input(z.string()).query(async ({ input }) => {
-    return await db
-      .select()
-      .from(sudoTable)
-      .where(like(sudoTable.sudoName, `%${input}%`));
+    return await prisma.sudo.findMany({
+      where: {
+        sudoName: {
+          contains: input,
+          mode: "insensitive",
+        },
+      },
+    });
   }),
+
   getSudoByNim: publicProcedure.input(z.number()).query(async ({ input }) => {
-    return await db
-      .select()
-      .from(sudoTable)
-      .where(eq(sudoTable.sudoNim, input));
+    return await prisma.sudo.findMany({
+      where: {
+        sudoNim: input,
+      },
+    });
   }),
+
   getSudoByStatus: publicProcedure
     .input(z.enum(["Daemon", "Suspect", "Clear", "Unknown"]))
     .query(async ({ input }) => {
-      return await db
-        .select()
-        .from(sudoTable)
-        .where(eq(sudoTable.sudoStatus, input));
+      return await prisma.sudo.findMany({
+        where: {
+          sudoStatus: input,
+        },
+      });
     }),
+
   updateSudoStatus: publicProcedure
     .input(
       z.object({
         inputNim: z.number(),
         inputStatus: z.enum(["Daemon", "Suspect", "Clear", "Unknown"]),
-      }),
+      })
     )
     .mutation(async ({ input }) => {
       const { inputNim, inputStatus } = input;
-      const updatedUser = await db
-        .update(sudoTable)
-        .set({ sudoStatus: inputStatus })
-        .where(eq(sudoTable.sudoNim, inputNim))
-        .returning();
+      const updatedUser = await prisma.sudo.updateMany({
+        where: {
+          sudoNim: inputNim,
+        },
+        data: {
+          sudoStatus: inputStatus,
+        },
+      });
       return updatedUser;
     }),
 });
