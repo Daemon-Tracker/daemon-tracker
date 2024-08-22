@@ -15,6 +15,13 @@
       "when": 1724261429371,
       "tag": "0001_eager_doctor_spectrum",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1724301559874,
+      "tag": "0002_whole_big_bertha",
+      "breakpoints": true
     }
   ]
 }
