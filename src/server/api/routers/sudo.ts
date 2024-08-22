@@ -1,8 +1,8 @@
 import { z } from "zod";
-import { 
-  createTRPCRouter, 
+import {
+  createTRPCRouter,
   protectedProcedure,
-  publicProcedure, 
+  publicProcedure,
 } from "~/server/api/trpc";
 import { PrismaClient } from "@prisma/client";
 
@@ -12,7 +12,7 @@ export const sudoRouter = createTRPCRouter({
   getAllSudo: publicProcedure.query(async () => {
     return await prisma.sudo.findMany();
   }),
-  
+
   getSudoByName: publicProcedure.input(z.string()).query(async ({ input }) => {
     return await prisma.sudo.findMany({
       where: {
@@ -47,11 +47,11 @@ export const sudoRouter = createTRPCRouter({
       z.object({
         inputNim: z.number(),
         inputStatus: z.enum(["Daemon", "Suspect", "Clear", "Unknown"]),
-      })
+      }),
     )
     .mutation(async ({ input }) => {
       const { inputNim, inputStatus } = input;
-      const updatedUser = await prisma.sudo.updateMany({
+      await prisma.sudo.updateMany({
         where: {
           sudoNim: inputNim,
         },
@@ -59,6 +59,13 @@ export const sudoRouter = createTRPCRouter({
           sudoStatus: inputStatus,
         },
       });
-      return updatedUser;
+
+      const updatedRecords = await prisma.sudo.findMany({
+        where: {
+          sudoNim: inputNim,
+        },
+      });
+
+      return updatedRecords;
     }),
 });
