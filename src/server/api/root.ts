@@ -1,4 +1,3 @@
-import { postRouter } from "~/server/api/routers/post";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 import { sudoRouter } from "./routers/sudo";
 
@@ -9,7 +8,6 @@ import { sudoRouter } from "./routers/sudo";
  */
 export const appRouter = createTRPCRouter({
   sudo: sudoRouter,
-  post: postRouter,
 });
 
 // export type definition of API

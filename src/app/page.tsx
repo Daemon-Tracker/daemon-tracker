@@ -6,6 +6,7 @@ import { HydrateClient } from "~/trpc/server";
 import { Role } from "@prisma/client";
 import Image from "next/image";
 import logo from "public/logo-daemon-tracker.png";
+import SignIn from "./_components/signIn";
 
 export default async function Home() {
   const session = await getServerAuthSession();
@@ -30,6 +31,7 @@ export default async function Home() {
           
           <div className="flex flex-col items-center gap-2"> {/* OAuth Test */}
             <div className="flex flex-col items-center justify-center gap-4">
+              <SignIn />
               <Link
                 href={session ? "/api/auth/signout" : "/api/auth/signin"}
                 className="rounded-full bg-gradient-to-r from-[#000000] to-[#434343] px-20 py-3 font-semibold no-underline transition hover:bg-white/20 text-white"
