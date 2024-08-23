@@ -23,6 +23,10 @@ declare module "next-auth" {
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db) as Adapter,
+  pages: {
+    signIn: '/', 
+    error: '/',
+  },
   providers: [
     Google({
       clientId: env.GOOGLE_ID,
