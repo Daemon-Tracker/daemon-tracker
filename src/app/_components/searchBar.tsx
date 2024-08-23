@@ -26,12 +26,23 @@ const SearchBar = () => {
   const [searchInput, setSearchInput] = useState<string>("");
   const [query, setQuery] = useState<string>("");
   const [inputStatus, setInputStatus] = useState<$Enums.Status>("Unknown");
+  // const [sudoNim, setSudoNim] = useState<number>(0);
 
   // Handle input change
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     setSearchInput(event.target.value);
   };
+
+  // Handle Search By Name or By NIM
+
+  // const sudoByNim = api.sudo.getSudoByNim.useQuery(sudoNim);
+  // const sudoDataByNim = sudoByNim.data;
+  // useEffect(() => {
+  //   if (sudoDataByNim) {
+  //     setSudoData(sudoDataByNim);
+  //   }
+  // }, [sudoDataByNim, setSudoData]);
 
   const sudoByName = api.sudo.getSudoByName.useQuery(query);
   const sudoDataByName = sudoByName.data;
@@ -43,6 +54,10 @@ const SearchBar = () => {
 
   // Handle search button
   const handleSearch = () => {
+    // if (!isNaN(Number(query))) {
+    //   const sudoNim = Number(query);
+    //   setSudoNim(sudoNim);
+    // }
     setQuery(searchInput);
   };
 
@@ -74,7 +89,7 @@ const SearchBar = () => {
         <input
           type="text"
           name="searchInput"
-          placeholder="Insert Name / NIM"
+          placeholder="Insert Name"
           value={searchInput}
           onChange={handleInputChange}
           className="h-10 w-full rounded-2xl bg-white p-2 ring-1 ring-[#A8A8A8] focus:ring-gray-800"
