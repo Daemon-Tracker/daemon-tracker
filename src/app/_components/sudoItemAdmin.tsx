@@ -14,7 +14,7 @@ interface SudoItemProps {
 }
 
 const SudoItemAdmin: React.FC<SudoItemProps> = ({
-  sudoName = "<Sudo Name>",
+  sudoName = "SUDO",
   sudoNim = 19621000,
   sudoMajor = "IF / STI",
   sudoStatus = "Unknown",
@@ -83,15 +83,17 @@ const SudoItemAdmin: React.FC<SudoItemProps> = ({
               />
             </div>
           )}
-          {status !== "Daemon" && status !== "Suspect" && (
-            <div className="h-10 w-full rounded-2xl bg-[#FF7A7A] p-2 text-center font-semibold text-white ring-1 ring-[#A8A8A8]">
-              <Dropdown
-                options={options}
-                onChange={handleDropdownChange}
-                selectedValue={status}
-              />
-            </div>
-          )}
+          {status !== "Daemon" &&
+            status !== "Suspect" &&
+            status !== "Clear" && (
+              <div className="h-10 w-full rounded-2xl bg-[#FF7A7A] p-2 text-center font-semibold text-white ring-1 ring-[#A8A8A8]">
+                <Dropdown
+                  options={options}
+                  onChange={handleDropdownChange}
+                  selectedValue={status}
+                />
+              </div>
+            )}
         </div>
       </div>
       <hr className="h-[1.5px] bg-gray-600" />

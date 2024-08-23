@@ -8,7 +8,7 @@ interface SudoItemProps {
 }
 
 const SudoItem: React.FC<SudoItemProps> = ({
-  sudoName = "<Sudo Name>",
+  sudoName = "SUDO",
   sudoNim = 19621000,
   sudoMajor = "IF / STI",
   sudoStatus = "Unknown",
@@ -37,11 +37,13 @@ const SudoItem: React.FC<SudoItemProps> = ({
               {sudoStatus}
             </div>
           )}
-          {sudoStatus !== "Daemon" && sudoStatus !== "Suspect" && (
-            <div className="h-10 w-full rounded-2xl bg-[#FF7A7A] p-2 text-center font-semibold text-white ring-1 ring-[#A8A8A8]">
-              {sudoStatus}
-            </div>
-          )}
+          {sudoStatus !== "Daemon" &&
+            sudoStatus !== "Suspect" &&
+            sudoStatus !== "Clear" && (
+              <div className="h-10 w-full rounded-2xl bg-[#FF7A7A] p-2 text-center font-semibold text-white ring-1 ring-[#A8A8A8]">
+                {sudoStatus}
+              </div>
+            )}
         </div>
       </div>
       <hr className="h-[1.5px] bg-gray-600" />

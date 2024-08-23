@@ -23,7 +23,7 @@ export const SudoContextProvider: React.FC<{ children: ReactNode }> = ({
     {
       sudoId: "1",
       sudoNim: 19621000,
-      sudoName: "<Sudo Name>",
+      sudoName: "SUDO",
       sudoMajor: "IF_Ganesha",
       sudoStatus: "Unknown",
     },
