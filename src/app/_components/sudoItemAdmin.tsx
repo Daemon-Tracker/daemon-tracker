@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState, useContext, useEffect } from "react";
-import { $Enums } from "@prisma/client";
+import { type $Enums } from "@prisma/client";
 import Dropdown from "./dropdown";
 import { api } from "~/trpc/react";
-import { SudoContext, SudoContextType } from "../_context/sudoContext";
+import { SudoContext } from "../_context/sudoContext";
 
 interface SudoItemProps {
   sudoName?: string;
@@ -29,7 +29,7 @@ const SudoItemAdmin: React.FC<SudoItemProps> = ({
   const [status, setStatus] = useState<$Enums.Status>("Unknown");
   useEffect(() => {
     setStatus(sudoStatus);
-  }, [setStatus]);
+  }, [setStatus, sudoStatus]);
 
   const options = [
     { value: "Daemon" },

@@ -1,11 +1,12 @@
-import { $Enums } from "@prisma/client";
-import React, { useState } from "react";
+import { type $Enums } from "@prisma/client";
+import React from "react";
 
 interface DropdownProps {
   options: { value: string }[];
   onChange: (value: $Enums.Status) => void;
   selectedValue: string;
 }
+
 
 const Dropdown: React.FC<DropdownProps> = ({
   options,

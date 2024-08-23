@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState, useContext, useEffect } from "react";
-import { SudoContext, SudoContextType } from "../_context/sudoContext";
+import { SudoContext } from "../_context/sudoContext";
 import { api } from "~/trpc/react";
-import { $Enums } from "@prisma/client";
+import { type $Enums } from "@prisma/client";
 
 const SearchBar = () => {
   const context = useContext(SudoContext);
