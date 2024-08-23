@@ -22,7 +22,7 @@ export default async function Home() {
   return (
     <HydrateClient>
       <main className="flex min-h-screen flex-col items-center justify-center bg-white text-black">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-12">
+        <div className="container flex flex-col items-center justify-center gap-12 px-4">
         <Image src={logo} alt="daemon-tracker logo" className="w-2/3 md:w-1/2 lg:w-1/3 xl:w-1/4"/>
             <div className="text-center">
               <p className="text-2xl">Welcome to</p>
@@ -32,13 +32,6 @@ export default async function Home() {
           <div className="flex flex-col items-center gap-2"> {/* OAuth Test */}
             <div className="flex flex-col items-center justify-center gap-4">
               <SignIn />
-              {/* <Link
-                href={session ? "/api/auth/signout" : "/api/auth/signin"}
-                className="rounded-full bg-gradient-to-r from-[#000000] to-[#434343] px-20 py-3 font-semibold no-underline transition hover:bg-white/20 text-white"
-              >
-                {session ? "Sign out" : "Sign in"}
-                {session ? `${session.user.role}` : ""}
-              </Link> */}
             </div>
           </div>
         </div>
